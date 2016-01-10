@@ -6,20 +6,20 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import me.mssodhi.myapplication.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView mainTextView;
-    FloatingActionButton floatingActionButton;
-    Button loginButton;
     EditText emailField, passwordField;
+    Button loginButton;
+    FloatingActionButton floatingActionButton;
+
+
     String username = "jack", password = "";
 
     @Override
@@ -31,31 +31,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initButtons() {
-
         mainTextView = (TextView) findViewById(R.id.mainTextView);
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        loginButton = (Button) findViewById(R.id.loginButton);
+
         emailField = (EditText) findViewById(R.id.emailField);
         passwordField = (EditText) findViewById(R.id.passwordField);
 
-        /* Controls and method calls */
-        /*                           */
-        /* Controls and method calls */
-
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Contact Manvinder Sodhi at mssodhi@ucdavis.edu", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login(v);
-            }
-        });
+        loginButton = (Button) findViewById(R.id.loginButton);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        loginButton.setOnClickListener(this);
+        floatingActionButton.setOnClickListener(this);
 
     }
 
@@ -70,22 +54,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.loginButton:
+                login(view);
+                break;
+            case R.id.fab:
+                Snackbar.make(view, "Contact Manvinder Sodhi at mssodhi@ucdavis.edu", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                break;
         }
 
-        return super.onOptionsItemSelected(item);
     }
-
 }
