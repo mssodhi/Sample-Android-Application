@@ -1,5 +1,6 @@
 package me.mssodhi.myapplication.controllers;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,21 +18,17 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
     FloatingActionButton floatingActionButton;
     Button logoutButton;
 
-    User currentUser = new User();
-
-
-    public void populateUser() {
-        currentUser.setEmail("jack_smith@yahoo.com");
-        currentUser.setFirstName("Jack");
-        currentUser.setLastName("Smith");
-        currentUser.setAge(43);
-    }
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing);
-        populateUser();
+
+        // Retrieve the current user from loginActivity
+        Intent i = this.getIntent();
+        Bundle bundle = i.getExtras();
+        currentUser = (User) bundle.getSerializable("currentUser");
         initButtons();
     }
 
@@ -55,7 +52,8 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.logoutButton:
-//                System.out.println("Logout button pressed");
+                currentUser = null;
+                startActivity(new Intent(Landing.this, MainActivity.class).putExtra("currentUser", currentUser));
                 break;
             case R.id.fab:
                 Snackbar.make(view, "Contact Manvinder Sodhi at mssodhi@ucdavis.edu", Snackbar.LENGTH_LONG).setAction("Action", null).show();

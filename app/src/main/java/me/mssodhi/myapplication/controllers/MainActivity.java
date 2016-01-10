@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import me.mssodhi.myapplication.R;
+import me.mssodhi.myapplication.domain.User;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,9 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText emailField, passwordField;
     Button loginButton;
     FloatingActionButton floatingActionButton;
-
-
     String username = "jack", password = "";
+    User currentUser = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void login(View view) {
         Snackbar.make(view, "Authenticating...", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-        // On successful login, go to the landing page
-        if (emailField.getText().toString().equals(username) && passwordField.getText().toString().equals(password)) {
-            startActivity(new Intent(MainActivity.this, Landing.class));
+
+        // Get the current user from databse based on email, and password. Set the result to current user.
+        currentUser.setEmail(emailField.getText().toString());
+        currentUser.setFirstName("Jack");
+        currentUser.setLastName("Smith");
+        currentUser.setAge(43);
+
+        if (emailField.getText().toString().equals(username) && passwordField.getText().toString().equals(password) && currentUser != null) {
+
+            // Package up the currentUser for landingActivity
+            Intent i = new Intent(MainActivity.this, Landing.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("currentUser", currentUser);
+            i.putExtras(bundle);
+            startActivity(i);
         } else {
             mainTextView.setText("Login failed");
             Snackbar.make(view, "Login failed", Snackbar.LENGTH_LONG).setAction("Action", null).show();
