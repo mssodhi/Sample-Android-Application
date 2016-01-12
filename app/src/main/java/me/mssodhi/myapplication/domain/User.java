@@ -7,12 +7,20 @@ public class User implements Serializable {
 
     private int id;
     private int age;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
+    private String facebookID;
 
     public int getAge() {
         return age;
+    }
+
+    public String getFacebookID() {
+        return facebookID;
+    }
+
+    public void setFacebookID(String facebookID) {
+        this.facebookID = facebookID;
     }
 
     public void setAge(int age) {
@@ -27,14 +35,6 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -43,12 +43,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

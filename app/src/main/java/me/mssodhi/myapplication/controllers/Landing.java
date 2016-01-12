@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import me.mssodhi.myapplication.R;
 import me.mssodhi.myapplication.domain.User;
@@ -17,8 +18,7 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
     TextView nameField, ageField, emailField;
     FloatingActionButton floatingActionButton;
     Button logoutButton;
-
-    User currentUser;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,10 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
         // Retrieve the current user from loginActivity
         Intent i = this.getIntent();
         Bundle bundle = i.getExtras();
-        currentUser = (User) bundle.getSerializable("currentUser");
+        user = (User) bundle.getSerializable("currentUser");
+
+        Toast.makeText(Landing.this, "welcome " + user.getName(), Toast.LENGTH_LONG).show();
+
         initButtons();
     }
 
@@ -43,17 +46,15 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
         logoutButton.setOnClickListener(this);
         floatingActionButton.setOnClickListener(this);
 
-        nameField.setText("Name: " + currentUser.getFirstName() + " " + currentUser.getLastName() + ".");
-        ageField.setText("Age: " + currentUser.getAge());
-        emailField.setText("Email: " + currentUser.getEmail());
+        nameField.setText("Name: " + user.getName() + ".");
+        emailField.setText("Email: " + user.getEmail());
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.logoutButton:
-                currentUser = null;
-                startActivity(new Intent(Landing.this, MainActivity.class).putExtra("currentUser", currentUser));
+                startActivity(new Intent(Landing.this, LoginController.class).putExtra("request", "logout"));
                 break;
             case R.id.fab:
                 Snackbar.make(view, "Contact Manvinder Sodhi at mssodhi@ucdavis.edu", Snackbar.LENGTH_LONG).setAction("Action", null).show();
