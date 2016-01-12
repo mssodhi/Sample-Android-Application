@@ -10,15 +10,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.widget.ProfilePictureView;
+
+
 import me.mssodhi.myapplication.R;
 import me.mssodhi.myapplication.domain.User;
 
 public class Landing extends AppCompatActivity implements View.OnClickListener {
-
     TextView nameField, ageField, emailField;
     FloatingActionButton floatingActionButton;
     Button logoutButton;
     User user;
+    ProfilePictureView profilePictureView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,7 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
         Bundle bundle = i.getExtras();
         user = (User) bundle.getSerializable("currentUser");
 
-        Toast.makeText(Landing.this, "welcome " + user.getName(), Toast.LENGTH_LONG).show();
+        Toast.makeText(Landing.this, "Welcome " + user.getName(), Toast.LENGTH_LONG).show();
 
         initButtons();
     }
@@ -45,6 +48,9 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
 
         logoutButton.setOnClickListener(this);
         floatingActionButton.setOnClickListener(this);
+
+        profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
+        profilePictureView.setProfileId(user.getFacebookID());
 
         nameField.setText("Name: " + user.getName() + ".");
         emailField.setText("Email: " + user.getEmail());
