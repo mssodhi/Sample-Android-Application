@@ -2,4 +2,6 @@
     <string name="app_name">Sample App</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">135131650197091</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>
