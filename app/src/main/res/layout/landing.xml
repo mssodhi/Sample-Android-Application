@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:facebook="http://schemas.android.com/apk/res-auto"
@@ -8,12 +8,14 @@
 
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:text="Welcome to Android App"
         android:id="@+id/mainTextView"
         android:layout_marginBottom="15pt"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:layout_alignRight="@+id/logoutButton"
+        android:layout_alignEnd="@+id/logoutButton" />
 
 
     <com.facebook.login.widget.ProfilePictureView
@@ -21,33 +23,53 @@
         android:layout_height="wrap_content"
         android:id="@+id/profilePicture"
         android:minHeight="50dp"
-        android:minWidth="50dp" />
+        android:minWidth="50dp"
+        android:layout_below="@+id/mainTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/nameField"
-        android:text="Name:" />
+        android:text="Name:"
+        android:layout_below="@+id/profilePicture"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="21dp" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:password="false"
         android:id="@+id/emailField"
-        android:text="Email:" />
+        android:text="Email:"
+
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Logout"
         android:id="@+id/logoutButton"
-        android:background="#5C6BC0" />
+        android:background="#5C6BC0"
+        android:layout_above="@+id/fab"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="41dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_help"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-</LinearLayout>
+</RelativeLayout>
