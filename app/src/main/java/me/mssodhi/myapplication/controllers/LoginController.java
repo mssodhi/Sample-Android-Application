@@ -15,7 +15,6 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -37,21 +36,8 @@ public class LoginController extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.login);
         accessToken = AccessToken.getCurrentAccessToken();
-        String parameter = "";
-        // Retrieve the current user from loginActivity
-        Intent intent = getIntent();
-        if(intent.getExtras() != null){
-            parameter = intent.getExtras().getString("request");
-            if(parameter.equals("logout")){
-                try {
-                    LoginManager.getInstance().logOut();
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                }
-            }
-        }
 
-        if(accessToken != null && !parameter.equals("logout")){
+        if(accessToken != null){
             GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
                 @Override
                 public void onCompleted(JSONObject object, GraphResponse response) {
@@ -129,7 +115,7 @@ public class LoginController extends Activity {
                                 e.printStackTrace();
                             }
 
-                            Toast.makeText(LoginController.this,"welcome "+ user.getName(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginController.this,"Welcome "+ user.getName(),Toast.LENGTH_LONG).show();
 
                             // Package up the currentUser for landingActivity
                             Intent i = new Intent(LoginController.this, Landing.class);

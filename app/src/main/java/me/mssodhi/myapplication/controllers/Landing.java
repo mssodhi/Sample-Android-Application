@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
 
 
@@ -22,7 +23,6 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
     Button logoutButton;
     User user;
     ProfilePictureView profilePictureView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,6 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
     public void initButtons() {
 
         nameField = (TextView) findViewById(R.id.nameField);
-        ageField = (TextView) findViewById(R.id.ageField);
         emailField = (TextView) findViewById(R.id.emailField);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         logoutButton = (Button) findViewById(R.id.logoutButton);
@@ -60,7 +59,8 @@ public class Landing extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.logoutButton:
-                startActivity(new Intent(Landing.this, LoginController.class).putExtra("request", "logout"));
+                LoginManager.getInstance().logOut();
+                startActivity(new Intent(Landing.this, LoginController.class));
                 break;
             case R.id.fab:
                 Snackbar.make(view, "Contact Manvinder Sodhi at mssodhi@ucdavis.edu", Snackbar.LENGTH_LONG).setAction("Action", null).show();

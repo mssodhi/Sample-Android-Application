@@ -36,18 +36,12 @@
         android:id="@+id/emailField"
         android:text="Email:" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:password="false"
-        android:id="@+id/ageField"
-        android:text="Age:" />
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Logout"
-        android:id="@+id/logoutButton"/>
+        android:id="@+id/logoutButton"
+        android:background="#5C6BC0" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
